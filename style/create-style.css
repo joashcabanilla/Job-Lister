@@ -16,71 +16,73 @@ body {
 }
 .container {
   width: 400px;
-  height: 450px;
+  height: 400px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   box-shadow: 3px 3px 3px;
 }
-.login-label {
+h1 {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-.header-login {
   font-family: "Varta", sans-serif;
   font-size: 30px;
+  margin-top: 20px;
+}
+.error-account {
+  display: flex;
+  justify-content: center;
   margin-top: 5px;
 }
-.image {
+.error-create {
+  font-family: "Roboto Mono", monospace;
+  font-size: 18px;
+  color: #800000;
+}
+.div-create {
+  display: flex;
+  justify-content: left;
+  flex-direction: row;
+  margin-bottom: 10px;
+  text-indent: 30px;
+}
+.select-label {
+  font-family: "Varta", sans-serif;
+  font-size: 20px;
+}
+.select-combo {
+  font-family: "Roboto Mono", monospace;
+  font-size: 18px;
+  width: 150px;
+  outline: none;
+  margin-left: -20px;
+}
+.create-form {
   display: flex;
   justify-content: center;
-}
-.input-name {
+  flex-direction: column;
   margin-top: 20px;
+}
+.create-button {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
 }
-.name {
+.create-account {
   width: 300px;
-  height: 40px;
+  height: 30px;
   outline: none;
   border: none;
-  text-indent: 10px;
   font-family: "Roboto Mono", monospace;
   font-size: 18px;
   margin-bottom: 10px;
+  text-indent: 5px;
 }
-.error {
+.input-form {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  flex-direction: column;
+  align-items: center;
 }
-.error-message {
-  font-family: "Roboto Mono", monospace;
-  font-size: 15px;
-  color: #800000;
-}
-.remember-div {
-  display: flex;
-  justify-content: left;
-  margin-left: 50px;
-  margin-top: 10px;
-}
-.remember-label {
-  font-family: "Roboto Mono", monospace;
-  font-size: 15px;
-}
-.remember {
-  transform: scale(1.5);
-}
-.login-button {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-.button {
+.create-submit {
   width: 200px;
   height: 40px;
   border-radius: 10px;
@@ -88,6 +90,7 @@ body {
   background: #87cefa;
   font-size: 20px;
   font-family: "Roboto Mono", monospace;
+  margin-top: 20px;
 }
 .forgot {
   margin-top: 20px;
