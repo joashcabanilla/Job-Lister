@@ -1,0 +1,154 @@
+@import url("https://fonts.googleapis.com/css2?family=Varta:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  width: 100%;
+  height: 100vh;
+  background: #708090;
+  display: flex;
+  justify-content: center;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 200px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.8);
+  margin-top: 40px;
+  width: 800px;
+  align-items: center;
+}
+h1 {
+  font-family: "Varta", sans-serif;
+  font-size: 25px;
+  margin-left: 20px;
+}
+.link {
+  font-family: "Roboto Mono", monospace;
+  font-size: 18px;
+  text-decoration: none;
+  margin-right: 20px;
+  color: #1a1aff;
+}
+.link:hover {
+  text-decoration: underline;
+}
+.category {
+  display: flex;
+  background: rgba(255, 255, 255, 0.5);
+  margin-top: 5px;
+  width: 800px;
+  padding-bottom: 20px;
+  padding-top: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.category-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.category-select {
+  font-family: "Roboto Mono", monospace;
+  font-size: 18px;
+  width: 500px;
+  outline: none;
+}
+.button {
+  width: 200px;
+  height: 40px;
+  border-radius: 10px;
+  outline: none;
+  background: #87cefa;
+  font-size: 20px;
+  font-family: "Roboto Mono", monospace;
+  margin-top: 20px;
+}
+.content {
+  display: flex;
+  background: rgba(255, 255, 255, 0.3);
+  margin-top: 5px;
+  width: 800px;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.job-category {
+  margin-top: 15px;
+}
+.job-database {
+  display: flex;
+  background: rgba(255, 255, 255, 0.3);
+  width: 800px;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 50px;
+}
+.job {
+  border-radius: 10px;
+  border-style: ridge;
+  width: 700px;
+  margin-bottom: 10px;
+}
+p {
+  font-family: "Roboto Mono", monospace;
+  font-size: 15px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+.view:link,
+.view:visited {
+  background-color: #87cefa;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  color: black;
+  border-radius: 10px;
+}
+.view:hover,
+.view:active {
+  background-color: #87cefa;
+  opacity: 0.8;
+}
+.view {
+  margin-left: 20px;
+  margin-bottom: 10px;
+  font-family: "Roboto Mono", monospace;
+  font-size: 18px;
+}
+.div-edit-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.edit-input {
+  font-family: "Roboto Mono", monospace;
+  font-size: 18px;
+  margin-top: 10px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  text-indent: 10px;
+  width: 700px;
+  height: 40px;
+}
+.label-form {
+  font-family: "Roboto Mono", monospace;
+  font-size:20px;
+  margin-top: 15px;
+  margin-left: 10px;
+  font-weight:bold;
+}

@@ -6,10 +6,6 @@ if(isset($_SESSION['url']))
 {
     header("location:".$_SESSION['url']);
 }
-if(isset($_SESSION['email']))
-{
-    header("location:verify.php");
-}
 if(isset($_POST['submit-account']))
 {
     $user_account = $_POST['user_account'];

@@ -20,7 +20,7 @@ if(!isset($_SESSION['email']))
 if(isset($_POST['submit']))
 {
     $code = $_POST['code'];
-    $email = $_SESSION['email'];
+    $email = $_GET['Email'];
     $sql = "Select * from account where email = '$email' and otp = '$code' ";
     $result = mysqli_query($con,$sql);
     if(mysqli_num_rows($result) > 0)
@@ -51,7 +51,7 @@ ob_end_flush();
     <div class="container" style="height: 220px;">
         <div class="create-header">
             <h1>VERIFY ACCOUNT</h1>
-            <p style = "display:flex; justify-content: center;font-family: 'Roboto Mono', monospace;font-size: 18px;"><?php if(isset($_SESSION["email"])){echo $_SESSION["email"];}?></p>
+            <p style = "display:flex; justify-content: center;font-family: 'Roboto Mono', monospace;font-size: 18px;"><?php if(isset($_GET["Email"])){echo $_GET["Email"];}?></p>
         </div>
         <div class="error-account">
             <p class="error-create" style="margin-bottom: -10px;"><?php if(isset($_GET["error"])){echo $_GET["error"];}?></p>
