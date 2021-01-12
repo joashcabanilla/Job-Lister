@@ -23,30 +23,16 @@ if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $sql = "Select * From account Where email = '$email' and password = '$password' and verification = 'true'";
+    $sql = "Select * From admin Where username = '$email' and password = '$password'";
     $result = mysqli_query($con, $sql);
     if (mysqli_num_rows($result) > 0) {
         $_SESSION['user'] = $email;
-        $row = mysqli_fetch_assoc($result);
-        if ($row['user_account'] == 'Employee') {
-            header("location:employee.php");
-            remember("employee");
-            $_SESSION['user-account'] = "employee";
-        } else {
-            header("location:employer.php");
-            remember("employer");
-            $_SESSION['user-account'] = "employer";
-        }
-    } else {
-        $sql = "Select * From account Where email = '$email' and password = '$password' and verification = 'false'";
-        $result = mysqli_query($con, $sql);
-        if (mysqli_num_rows($result) > 0) {
-            header("location:verify.php?Email=$email");
-        }
-        else
-        {
-            $_GET['error'] = "INVALID EMAIL OR PASSWORD";
-        }
+        remember("admin");
+        $_SESSION['user-account'] = "admin";
+        header("location:admin.php");
+    } else 
+    {
+        $_GET['error'] = "INVALID USERNAME OR PASSWORD";
     }
 }
 ob_end_flush();
@@ -64,7 +50,7 @@ ob_end_flush();
 <body>
     <div class="container">
         <div class="login-label">
-            <p class="header-login">WELCOME TO JOB LISTER</p>
+            <p class="header-login">ADMIN LOG IN</p>
         </div>
         <div class="image">
             <img src="image/job.png" alt="job" width="100" height="100">
@@ -75,7 +61,7 @@ ob_end_flush();
         <div class="login-form">
             <form action="" method="POST">
                 <div class="input-name">
-                    <input class="name" type="email" placeholder="Email" name="email" required value="<?php if(isset($_COOKIE["login-email"])){echo $_COOKIE["login-email"];}?>">
+                    <input class="name" type="text" placeholder="Username" name="email" required value="<?php if(isset($_COOKIE["login-email"])){echo $_COOKIE["login-email"];}?>">
                     <input class="name" type="password" placeholder="Password" name="password" required value="<?php if(isset($_COOKIE["login-password"])){echo $_COOKIE["login-password"];}?>">
                 </div>
                 <div class="remember-div">
@@ -88,10 +74,7 @@ ob_end_flush();
         </div>
     </div>
     <div class="forgot">
-            <a class="forgot-link" href="recover.php">Forgot Password</a><a class="forgot-link" href="create.php">Create account</a>
-    </div>
-    <div class="forgot">
-            <a class="forgot-link" href="admin-login.php">ADMIN LOG IN</a>
+            <a class="forgot-link" href="index.php"> LOGIN APPLICANT/EMPLOYER</a>
     </div>
 </body>
 </html>

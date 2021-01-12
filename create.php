@@ -69,7 +69,7 @@ ob_end_flush();
             </div>
             <div class="div-combo">
                 <select class="select-combo" name="user_account">
-                <option value="Employee">Employee</option>
+                <option value="Employee">Applicant</option>
                 <option value="Employer">Employer</option>
                 </select>
                 </div>
@@ -77,7 +77,7 @@ ob_end_flush();
                 <div class="input-form">
                     <input class="create-account" name="create-name" type="text" placeholder="Enter Name" required value= "<?php if(isset($_GET["name"])){echo $_GET["name"];}?>">
                     <input class="create-account" name="create-email" type="email" placeholder="Enter Email Address" required value="<?php if(isset($_GET["email"])){echo $_GET["email"];}?>">
-                    <input class="create-account" name="create-password" type="password" placeholder="Enter Password" required value="<?php if(isset($_GET["password"])){echo $_GET["password"];}?>">
+                    <input class="create-account" name="create-password" minlength="4" pattern="[a-zA-Z0-9]+" title="password minimum length is 4 and password accept numbers and letters only" type="password" placeholder="Enter Password" required value="<?php if(isset($_GET["password"])){echo $_GET["password"];}?>">
                     <input class="create-account" name="create-confirmpassword" type="password" placeholder="Confirm Password" required value="<?php if(isset($_GET["confirmpassword"])){echo $_GET["confirmpassword"];}?>">
                 </div>
                 <div class="create-button">

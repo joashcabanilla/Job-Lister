@@ -31,6 +31,8 @@ function job_data($con)
         $contact_email = $data['contact_email'];
         $contact_number = $data['contact_number'];
         $category = $data['category'];
+        $qualification = $data['qualification'];
+        $experience = $data['experience'];
         $_GET['job_title'] = $job_title;
         $_GET['description'] = $description;
         $_GET['location'] = $location;
@@ -39,6 +41,8 @@ function job_data($con)
         $_GET['contact_email'] = $contact_email;
         $_GET['contact_number'] = $contact_number;
         $_GET['category'] = $category;
+        $_GET['qualification'] = $qualification;
+        $_GET['experience'] = $experience;
     }
     
 }
@@ -53,7 +57,9 @@ if(isset($_POST['save']))
     $contact_email = $_POST['contact_email'];
     $contact_number = $_POST['contact_number'];
     $category = $_POST['category'];
-    $sql = "Update job set job_title = '$job_title',description = '$description',location = '$location',company = '$company',salary = '$salary',contact_email = '$contact_email',contact_number = '$contact_number',category = '$category' Where job_id = '$id'";
+    $qualification = $_POST['qualification'];
+    $experience = $_POST['experience'];
+    $sql = "Update job set job_title = '$job_title',description = '$description',location = '$location',company = '$company',salary = '$salary',contact_email = '$contact_email',contact_number = '$contact_number',category = '$category',qualification = '$qualification',experience = '$experience' Where job_id = '$id'";
     mysqli_query($con,$sql);
     header("location:employer.php");
 }
@@ -97,15 +103,33 @@ ob_end_flush();
                     <input class="edit-input" name="company" type="text" value="<?php require_once('db-config.php'); job_data($con); echo $_GET['company']?>" required>
                     <label class="label-form">Category</label>
                     <select class="edit-input" name="category">
-                        <option value="Business" <?php require_once('db-config.php'); job_data($con); if($_GET['category'] == "Business"){echo "selected";}?>>Business</option>
-                        <option value="Technology" <?php require_once('db-config.php'); job_data($con); if($_GET['category'] == "Technology"){echo "selected";}?>>Technology</option>
-                        <option value="Retail" <?php require_once('db-config.php'); job_data($con); if($_GET['category'] == "Retail"){echo "selected";}?>>Retail</option>
-                        <option value="Construction" <?php require_once('db-config.php'); job_data($con); if($_GET['category'] == "Construction"){echo "selected";}?>>Construction</option>
+                    <?php
+                        require_once('db-config.php');
+                            $sql = "Select * from category";
+                            $result = mysqli_query($con,$sql);
+                            while($row = mysqli_fetch_assoc($result))
+                            {
+                                $category = $row['category'];
+                                echo "<option value='$category'";
+                                require_once('db-config.php'); 
+                                job_data($con); 
+                                $data = $_GET['category'];
+                                if($category == $data)
+                                {
+                                    echo "selected";
+                                }
+                                echo">$category</option>";
+                            }
+                        ?>
                     </select>
                     <label class="label-form">Job Title</label>
                     <input class="edit-input" name="job_title" type="text" value="<?php require_once('db-config.php'); job_data($con); echo $_GET['job_title']?>" required>
                     <label class="label-form">Job Description</label>
                     <textarea style="height:160px; padding-top:10px;" class="edit-input" name="description" type="text" required><?php require_once('db-config.php'); job_data($con); echo $_GET['description']?></textarea>
+                    <label class="label-form">Qualifications</label>
+                    <textarea style="height:100px; padding-top:10px;" class="edit-input" name="qualification" type="text" required><?php require_once('db-config.php'); job_data($con); echo $_GET['qualification']?></textarea>
+                    <label class="label-form">Experience</label>
+                    <textarea style="height:100px; padding-top:10px;" class="edit-input" name="experience" type="text" required><?php require_once('db-config.php'); job_data($con); echo $_GET['experience']?></textarea>
                     <label class="label-form">Location</label>
                     <textarea style="height:80px; padding-top:10px;" class="edit-input" name="location" type="text" required><?php require_once('db-config.php'); job_data($con); echo $_GET['location']?></textarea>
                     <label class="label-form">Salary</label>

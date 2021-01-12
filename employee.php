@@ -14,6 +14,10 @@ else
         {
             header("location:employer.php");
         }
+        elseif($_SESSION['user-account'] == "admin")
+        {
+            header("location:admin.php");
+        }
     }
 }
 ob_end_flush();
@@ -32,7 +36,7 @@ ob_end_flush();
 <div class="container">
     <div class="header">
         <div>
-        <h1>Employee Name <?php $email = $_SESSION['user']; $sql="Select * from account Where email = '$email'"; $result = mysqli_query($con,$sql); if(mysqli_num_rows($result) > 0){ $row = mysqli_fetch_assoc($result); echo $row['name'];}?></h1>
+        <h1>Applicant Name <?php $email = $_SESSION['user']; $sql="Select * from account Where email = '$email'"; $result = mysqli_query($con,$sql); if(mysqli_num_rows($result) > 0){ $row = mysqli_fetch_assoc($result); echo $row['name'];}?></h1>
         </div>
         <div class="header-link">
             <a class="link" href="logout.php">LOGOUT</a>  
@@ -45,18 +49,24 @@ ob_end_flush();
             <div class="category-form">
                 <div>
                     <select class="category-select" name="category">
-                        <option value="Latest">Choose Category</option>   
-                        <option value="Business">Business</option>
-                        <option value="Technology">Technology</option>
-                        <option value="Retail">Retail</option>
-                        <option value="Construction">Construction</option>
+                        <option value="Latest">Choose Category</option>
+                        <?php
+                        require_once('db-config.php');
+                            $sql = "Select * from category";
+                            $result = mysqli_query($con,$sql);
+                            while($row = mysqli_fetch_assoc($result))
+                            {
+                                $category = $row['category'];
+                                echo "<option value='$category'>$category</option>";
+                            }
+                        ?>   
                     </select>    
                 </div>
                 <div>
                     <button class="button" type="submit" name="submit-category">FIND</button>
                 </div>
                 <div>
-                <input name="search" type="text" class="edit-input" style="margin-top:20px; width:500px;" placeholder="Search Job Title">
+                <input name="search" type="text" class="edit-input" style="margin-top:20px; width:500px;font-size:15px;" placeholder="Search Job Title,Company,Employer or Location">
                 <button class="button" type="submit" name="search-button">Search</button>
                 </div>    
             </div>
@@ -99,13 +109,10 @@ ob_end_flush();
                 $contact_number = $data['contact_number'];
                 echo "<div class='job'> 
                             <h1 style='font-size: 25px; margin-top:5px;'>$job_title</h1>
-                            <p>Job Description: $description</p>
                             <p>Company: $company</p>
                             <p>Location: $location</p>
-                            <p>Salary: $salary</p>
-                            <p>Contact Email: $contact_email</p>
-                            <p>Contact Number: $contact_number</p>
                             <p> Date Posted: $date</p>
+                            <a style='background:#054d7a; color:white;'class = 'view' href='job-view.php?id=$id'>VIEW</a>
                             </div>";
             } 
             if(isset($_POST['submit-category']))
@@ -139,7 +146,7 @@ ob_end_flush();
                 if(isset($_POST['search-button']))
             {
                 $job_title = $_POST['search'];
-                $sql = "Select * From job where job_title LIKE '%$job_title%' order by date desc";
+                $sql = "Select * From job where job_title LIKE '%$job_title%' or location LIKE '$job_title' or company LIKE '$job_title' or employer LIKE '$job_title' order by date desc";
                 $result = mysqli_query($con,$sql);
                 while($data = mysqli_fetch_assoc($result))
                 {

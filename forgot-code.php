@@ -54,5 +54,8 @@ ob_end_flush();
                 </div>
             </form>
     </div>
+    <div class="forgot">
+            <a class="forgot-link" style="margin-top:20px;" href="forgot-resend.php?Email=<?php if(isset($_GET["Email"])){echo $_GET["Email"];}?>">RESEND CODE</a>
+    </div>
 </body>
 </html>

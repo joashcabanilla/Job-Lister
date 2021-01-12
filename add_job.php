@@ -25,7 +25,10 @@ if(isset($_POST['save']))
     $contact_email = $_POST['contact_email'];
     $contact_number = $_POST['contact_number'];
     $category = $_POST['category'];
-    $sql = "Insert into job(job_title,description,location,company,salary,contact_email,contact_number,category,email,date) values('$job_title','$description','$location','$company','$salary','$contact_email','$contact_number','$category','$email','$date')";
+    $qualification = $_POST['qualification'];
+    $experience = $_POST['experience'];
+    $sql="Select * from account Where email = '$email'"; $result = mysqli_query($con,$sql); if(mysqli_num_rows($result) > 0){ $row = mysqli_fetch_assoc($result); $employer = $row['name'];}
+    $sql = "Insert into job(job_title,description,location,company,salary,contact_email,contact_number,category,email,date,qualification,experience,employer) values('$job_title','$description','$location','$company','$salary','$contact_email','$contact_number','$category','$email','$date','$qualification','$experience','$employer')";
     mysqli_query($con,$sql);
     header("location:employer.php");
 }
@@ -62,15 +65,25 @@ ob_end_flush();
                     <input class="edit-input" name="company" type="text" required>
                     <label class="label-form">Category</label>
                     <select class="edit-input" name="category">
-                        <option value="Business">Business</option>
-                        <option value="Technology">Technology</option>
-                        <option value="Retail">Retail</option>
-                        <option value="Construction">Construction</option>
+                    <?php
+                        require_once('db-config.php');
+                            $sql = "Select * from category";
+                            $result = mysqli_query($con,$sql);
+                            while($row = mysqli_fetch_assoc($result))
+                            {
+                                $category = $row['category'];
+                                echo "<option value='$category'>$category</option>";
+                            }
+                        ?>
                     </select>
                     <label class="label-form">Job Title</label>
                     <input class="edit-input" name="job_title" type="text" required>
                     <label class="label-form">Job Description</label>
                     <textarea style="height:160px; padding-top:10px;" class="edit-input" name="description" type="text" required></textarea>
+                    <label class="label-form">Qualifications</label>
+                    <textarea style="height:100px; padding-top:10px;" class="edit-input" name="qualification" type="text" required></textarea>
+                    <label class="label-form">Experience</label>
+                    <textarea style="height:100px; padding-top:10px;" class="edit-input" name="experience" type="text" required></textarea>
                     <label class="label-form">Location</label>
                     <textarea style="height:80px; padding-top:10px;" class="edit-input" name="location" type="text" required></textarea>
                     <label class="label-form">Salary</label>
@@ -78,7 +91,7 @@ ob_end_flush();
                     <label class="label-form">Contact Email</label>
                     <input class="edit-input" name="contact_email" type="email" required>
                     <label class="label-form">Contact Number</label>
-                    <input class="edit-input" name="contact_number" type="text" required>
+                    <input class="edit-input" name="contact_number" type="number" pattern="[0-9]+" required>
                 </div>
                 <div style="margin-top:10px;padding-bottom: 20px;">
                     <button class="button" type="submit" name="save">SAVE</button>

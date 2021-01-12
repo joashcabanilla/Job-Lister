@@ -13,6 +13,10 @@ else{
         {
             header("location:employee.php");
         }
+        elseif($_SESSION['user-account'] == "admin")
+        {
+            header("location:admin.php");
+        }
     }
 }
 ob_end_flush();
@@ -46,10 +50,16 @@ ob_end_flush();
                 <div>
                     <select class="category-select" name="category">
                         <option value="Latest">Choose Category</option>   
-                        <option value="Business">Business</option>
-                        <option value="Technology">Technology</option>
-                        <option value="Retail">Retail</option>
-                        <option value="Construction">Construction</option>
+                        <?php
+                        require_once('db-config.php');
+                            $sql = "Select * from category";
+                            $result = mysqli_query($con,$sql);
+                            while($row = mysqli_fetch_assoc($result))
+                            {
+                                $category = $row['category'];
+                                echo "<option value='$category'>$category</option>";
+                            }
+                        ?>
                     </select>    
                 </div>
                 <div>
@@ -93,10 +103,14 @@ ob_end_flush();
                 $salary = $data['salary'];
                 $contact_email = $data['contact_email'];
                 $contact_number = $data['contact_number'];
+                $qualification = $data['qualification'];
+                $experience = $data['experience'];
                 echo "<div class='job'> 
                             <h1 style='font-size: 25px; margin-top:5px;'>$job_title</h1>
                             <p>Job Description: $description</p>
                             <p>Company: $company</p>
+                            <p>Qualification: $qualification</p>
+                            <p>Experience: $experience</p>
                             <p>Location: $location</p>
                             <p>Salary: $salary</p>
                             <p>Contact Email: $contact_email</p>
